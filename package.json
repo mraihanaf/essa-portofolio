@@ -1,0 +1,15 @@
+{
+  "name": "essa-portofolio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mraihanaf/essa-portofolio",
+  "author": "mraihanaf0@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.7"
+  }
+}
