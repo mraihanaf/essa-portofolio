@@ -1,16 +1,18 @@
 let lastKnownScrollPosition = 0;
 let ticking = false;
-function doSomething(scrollPos) {
-  // Do something with the scroll position
-//   console.log(scrollPos)
-}
+
 
 document.addEventListener("scroll", (event) => {
   lastKnownScrollPosition = window.scrollY;
 
   if (!ticking) {
     window.requestAnimationFrame(() => {
-      doSomething(lastKnownScrollPosition);
+      const scrollToDiscover = document.getElementById("scroll")
+      if(lastKnownScrollPosition > 0){
+        scrollToDiscover.classList.add("fade-out-animate")
+      } else {
+        scrollToDiscover.classList.remove("fade-out-animate")
+      }
       ticking = false;
     });
 

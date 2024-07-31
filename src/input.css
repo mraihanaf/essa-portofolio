@@ -10,6 +10,26 @@
     display: inline-block;
 }
 
+.fade-out-animate {
+    animation-name: fade-out;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+
+}
+
 @keyframes hello-animation {
     0% {
       transform: rotate(0deg);
