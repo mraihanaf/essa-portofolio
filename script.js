@@ -19,3 +19,5 @@ document.addEventListener("scroll", (event) => {
     ticking = true;
   }
 });
+
+AOS.init()

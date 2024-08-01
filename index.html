@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rai's Portofolio</title>
     <link rel="stylesheet" href="dist/output.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
 </head>
 <body>
     <!-- <nav>
@@ -16,7 +18,7 @@
             <li><a href="">Other</a></li>
         </ul>
     </nav> -->
-    <section id="home" class="h-screen flex items-center justify-center">
+    <section id="home" class="h-screen flex items-center justify-center" data-aos="fade-right" data-aos-duration="1500">
         <div class="container flex justify-center">
             <div class="flex flex-wrap">
                 <div class="w-full self-center px-4">
@@ -28,14 +30,14 @@
     </section>
     
     <div id="scroll" class="grid content-center -mt-24">
-        <a href="#about"><p class="text-center justify-end  text-slate-400">Scroll to discover</p></a>
+        <a href="#about"><p class="text-center justify-end  text-slate-400">Know more about me!</p></a>
         <div class="flex gap-3 mt-2 animate-bounce content-center place-content-center">
             <div class="border-solid border-t-slate-400 border-t-8 border-x-transparent border-x-8 border-b-0 "></div>
         </div>
     </div>
     
        
-    <section id="about" class="pt-36 pb-32">
+    <section id="about" class="pt-36 pb-32" data-aos="fade-down">
         <div class="flex flex-wrap">
             <div class="w-full px-20 mb-10">
                 <h4 class="text-4xl font-bold text-slate-900 py-16">About Me</h4>
@@ -43,6 +45,7 @@
             </div>
         </div>
     </section>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
