@@ -8,8 +8,8 @@
   "scripts": {
     "dev:css": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --watch",
     "build:css": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --minify",
-    "dev:server": "nodemon  --exec \"tsc && node ./build | pino-pretty -L info\" --ext ts",
-    "dev:server-debug": "nodemon  --exec \"tsc && node ./build | pino-pretty -L debug\" --ext ts",
+    "dev:server": "nodemon  --exec \"tsc && node ./build/server | pino-pretty -L info\" --ext ts",
+    "dev:server-debug": "nodemon  --exec \"tsc && node ./build/server | pino-pretty -L debug\" --ext ts",
     "build": "tsc",
     "start-server": "node ./build"
   },
@@ -19,6 +19,7 @@
     "@types/socket.io": "^3.0.2",
     "@whiskeysockets/baileys": "^6.7.5",
     "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
     "pino": "^9.3.2",
     "qrcode-terminal": "^0.12.0",
     "socket.io": "^4.7.5",
