@@ -6,8 +6,8 @@
   "author": "mraihanaf0@gmail.com",
   "license": "MIT",
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+    "dev": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --watch",
+    "build": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --minify"
   },
   "dependencies": {
     "tailwindcss": "^3.4.7"
