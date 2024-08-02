@@ -1,7 +1,6 @@
 let lastKnownScrollPosition = 0;
 let ticking = false;
 
-
 document.addEventListener("scroll", (event) => {
   lastKnownScrollPosition = window.scrollY;
 
@@ -19,5 +18,11 @@ document.addEventListener("scroll", (event) => {
     ticking = true;
   }
 });
+
+function onKeySubmit(){
+  console.log("Button clicked")
+  const passwordElement = document.getElementById("key-start")
+  const key = passwordElement.value
+}
 
 AOS.init()
