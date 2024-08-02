@@ -1,7 +1,7 @@
 {
   "name": "essa-portofolio",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://github.com/mraihanaf/essa-portofolio",
   "author": "mraihanaf0@gmail.com",
   "license": "MIT",
