@@ -6,10 +6,20 @@
   "author": "mraihanaf0@gmail.com",
   "license": "MIT",
   "scripts": {
-    "dev": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --watch",
-    "build": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --minify"
+    "dev:css": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --watch",
+    "build:css": "npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --minify",
+    "dev:server": "nodemon  --exec \"tsc && node ./build | pino-pretty -L info\" --ext ts",
+    "dev:server-debug": "nodemon  --exec \"tsc && node ./build | pino-pretty -L debug\" --ext ts",
+    "build": "tsc",
+    "start-server": "node ./build"
   },
   "dependencies": {
-    "tailwindcss": "^3.4.7"
+    "@whiskeysockets/baileys": "^6.7.5",
+    "bcrypt": "^5.1.1",
+    "pino": "^9.3.2",
+    "qrcode-terminal": "^0.12.0",
+    "socket.io": "^4.7.5",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.5.4"
   }
 }
