@@ -1,6 +1,12 @@
 let lastKnownScrollPosition = 0;
 let ticking = false;
-
+let keyMain = ""
+let users = []
+function sAD() {
+	randIndex = Math.floor(Math.random() * users.length);
+	randomItem = users.splice(randIndex, 1)[0];
+	return randomItem
+}
 document.addEventListener("scroll", (event) => {
   lastKnownScrollPosition = window.scrollY;
 
@@ -18,7 +24,7 @@ document.addEventListener("scroll", (event) => {
     ticking = true;
   }
 });
-
+const socket = io(window.location.host)
 async function onKeySubmit(){
   console.log("Button clicked")
   const passwordElement = document.getElementById("key-start")
@@ -33,16 +39,46 @@ async function onKeySubmit(){
 	body: JSON.stringify({password: key})
     };
     try {
-        const fetchResponse = await fetch(`http://${location}:8080/check`, settings);
-        const data = await fetchResponse.json();
-	console.log(data)
-   return data;
+        const fetchResponse = await fetch(`https://${location}/check`, settings);
+	const keyTemp = await fetchResponse.text()
+	console.log(fetchResponse.status)
+	console.log(keyTemp)
+	if(fetchResponse.status !== 200) return
+	keyMain = keyTemp
+	let heading = document.getElementById("special")
+	heading.textContent = "Giveaway🎉"
+	document.getElementById("key-start").remove()
+	const btn = document.getElementById("button-special")
+	const submitRandom = btn.cloneNode(true)
+	btn.remove()
+	const sections = document.getElementById("more")
+	const msg_el = heading.cloneNode(true)
+	msg_el.textContent = "Chat saya +62 812 3898 1143 Untuk Ikut. Dengan Pesan :"
+	sections.append(msg_el)
+	const msgP_el = heading.cloneNode(true)
+	msgP_el.textContent = "ikut dong rai nama aku [nama kalian]"
+	sections.append(msgP_el)
+	const notif = heading.cloneNode(true)
+	notif.textContent = ""
+	sections.append(notif)
+	socket.on("giveaway", (nama) => {
+		notif.textContent = `${nama} Ikut giveaway`
+		users.push(nama)
+		heading.textContent = `Giveaway🎉 (${users.length} orang ikut)`
+	})
+	submitRandom.textContent = "Mulai Giveaway"
+	sections.append(submitRandom)
+	submitRandom.onclick = () => {
+		socket.emit("broadcast",key)
+		console.log("clickedx")		// click event
+		notif.textContent = sAD()
+		msg_el.textContent = sAD()
+		msgP_el.textContent = sAD()
+	}
     } catch (e) {
-        return e;
+        console.error(e)
     }
 }
-
-const socket = io(window.location.host)
 
 socket.on("connect", () => {
   console.log("connected")

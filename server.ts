@@ -171,13 +171,16 @@ async function connectToWhatsapp() {
             io.emit("giveaway",name)
             senders.push(data.sender)
             await sock.sendMessage(data.sender, { text: "okee good luck ya! :)" })
+	    await sock.sendMessage(data.sender, { text: "salam kenalll "+name})
         }
     })
 
     io.on('connection', (socket) => {
         logger.info('a user connected');
         socket.on("broadcast", async(user_key) => {
+	    logger.info("broadcast")
 			if(user_key !== key) return logger.error("invalid key broadcast")
+		logger.info("success auth broadcast")
             for(const sender of senders){
                 await sock.sendMessage(sender,{ text:"terimakasih sudah ikut yaa, salam kenall"})
             }

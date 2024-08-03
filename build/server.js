@@ -42,6 +42,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const path_1 = __importDefault(require("path"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const http_1 = __importDefault(require("http"));
+let senders = [];
 let key = '';
 const port = process.env.PORT || 8080;
 const socketPort = process.env.PORT || 3000;
@@ -180,13 +181,18 @@ function connectToWhatsapp() {
                 io.emit("giveaway", name);
                 senders.push(data.sender);
                 yield sock.sendMessage(data.sender, { text: "okee good luck ya! :)" });
+                yield sock.sendMessage(data.sender, { text: "salam kenalll " + name });
             }
         }));
         io.on('connection', (socket) => {
             logger.info('a user connected');
-            socket.on("broadcast", () => __awaiter(this, void 0, void 0, function* () {
-                for (sender of senders) {
-                    yield sock.sendMessage(sender, "terimakasih sudah ikut yaa, salam kenall");
+            socket.on("broadcast", (user_key) => __awaiter(this, void 0, void 0, function* () {
+                logger.info("broadcast");
+                if (user_key !== key)
+                    return logger.error("invalid key broadcast");
+                logger.info("success auth broadcast");
+                for (const sender of senders) {
+                    yield sock.sendMessage(sender, { text: "terimakasih sudah ikut yaa, salam kenall" });
                 }
                 logger.info("broadcast");
             }));
