@@ -25,4 +25,16 @@ function onKeySubmit(){
   const key = passwordElement.value
 }
 
+const socket = io(window.location.host)
+
+socket.on("connect", () => {
+  console.log("connected")
+})
+
+socket.on("giveaway",name => {
+  console.log(name)
+})
+
+// socket.emit("broadcast","test")
+
 AOS.init()
