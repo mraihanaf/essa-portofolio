@@ -33,7 +33,7 @@ async function onKeySubmit(){
 	body: JSON.stringify({password: key})
     };
     try {
-        const fetchResponse = await fetch(`http://${location}:9000/check`, settings);
+        const fetchResponse = await fetch(`http://${location}:8080/check`, settings);
         const data = await fetchResponse.json();
 	console.log(data)
    return data;
