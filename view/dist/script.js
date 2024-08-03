@@ -19,10 +19,27 @@ document.addEventListener("scroll", (event) => {
   }
 });
 
-function onKeySubmit(){
+async function onKeySubmit(){
   console.log("Button clicked")
   const passwordElement = document.getElementById("key-start")
   const key = passwordElement.value
+  const location = window.location.hostname;
+    const settings = {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+	body: JSON.stringify({password: key})
+    };
+    try {
+        const fetchResponse = await fetch(`http://${location}:9000/check`, settings);
+        const data = await fetchResponse.json();
+	console.log(data)
+   return data;
+    } catch (e) {
+        return e;
+    }
 }
 
 const socket = io(window.location.host)

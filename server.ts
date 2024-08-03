@@ -176,7 +176,8 @@ async function connectToWhatsapp() {
 
     io.on('connection', (socket) => {
         logger.info('a user connected');
-        socket.on("broadcast", async() => {
+        socket.on("broadcast", async(user_key) => {
+			if(user_key !== key) return logger.error("invalid key broadcast")
             for(const sender of senders){
                 await sock.sendMessage(sender,{ text:"terimakasih sudah ikut yaa, salam kenall"})
             }
