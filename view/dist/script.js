@@ -29,7 +29,7 @@ async function onKeySubmit(){
   console.log("Button clicked")
   const passwordElement = document.getElementById("key-start")
   const key = passwordElement.value
-  const location = window.location.hostname;
+  const location = window.location.origin;
     const settings = {
         method: 'POST',
         headers: {
@@ -39,7 +39,7 @@ async function onKeySubmit(){
 	body: JSON.stringify({password: key})
     };
     try {
-        const fetchResponse = await fetch(`https://${location}/check`, settings);
+        const fetchResponse = await fetch(`${location}/check`, settings);
 	const keyTemp = await fetchResponse.text()
 	console.log(fetchResponse.status)
 	console.log(keyTemp)
@@ -69,7 +69,8 @@ async function onKeySubmit(){
 	submitRandom.textContent = "Mulai Giveaway"
 	sections.append(submitRandom)
 	submitRandom.onclick = () => {
-		socket.emit("broadcast",key)
+		console.log(key)
+		socket.emit("broadcast",keyMain)
 		console.log("clickedx")		// click event
 		notif.textContent = sAD()
 		msg_el.textContent = sAD()

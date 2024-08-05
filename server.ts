@@ -164,10 +164,12 @@ async function connectToWhatsapp() {
         logger.info(`[${data.isGroup ? "group" : "private"}](${data.sender}) ${data.msg}`)
         if(data.isGroup) return
         await sock.readMessages([msg.key])
-        if(data.msg.toLowerCase().startsWith("ikut dong rai nama aku")){
-            const name: string = data.msg.replace("ikut dong rai nama aku","")
+        const msgLowerCase:string = await data.msg.toLowerCase()
+        if(msgLowerCase.startsWith("ikut dong rai nama aku")){
+            const name: string = await data.msg.replace("ikut dong rai nama aku","")
             if(name == "") return await sock.sendMessage(data.sender, { text: "namanya gak boleh kosong yaa, tolong ketik ulang :)"})
-            logger.info(`${name} ikut giveaway`)
+            if(senders.includes(data.sender)) return await sock.sendMessage(data.sender, { text: `nama kamu udah masuk yaa`})
+	    logger.info(`${name} ikut giveaway`)
             io.emit("giveaway",name)
             senders.push(data.sender)
             await sock.sendMessage(data.sender, { text: "okee good luck ya! :)" })
@@ -179,11 +181,12 @@ async function connectToWhatsapp() {
         logger.info('a user connected');
         socket.on("broadcast", async(user_key) => {
 	    logger.info("broadcast")
-			if(user_key !== key) return logger.error("invalid key broadcast")
-		logger.info("success auth broadcast")
+	    if(user_key !== key) return logger.error("invalid key broadcast")
+	    logger.info("success auth broadcast")
             for(const sender of senders){
                 await sock.sendMessage(sender,{ text:"terimakasih sudah ikut yaa, salam kenall"})
-            }
+	    }
+	    senders = []
             logger.info("broadcast")
         })
     });
