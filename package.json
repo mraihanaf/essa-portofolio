@@ -11,7 +11,7 @@
     "dev:server": "nodemon  --exec \"npx tsc && node ./build/server | pino-pretty -L info\" --ext ts",
     "dev:server-debug": "nodemon  --exec \"npx tsc && node ./build/server | pino-pretty -L debug\" --ext ts",
     "build": "tsc",
-    "production": "npx tsc && npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --minify && node ./build"
+    "production": "npx tsc && npx tailwindcss -i ./view/input.css -o ./view/dist/output.css --minify && node ./build/server"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
