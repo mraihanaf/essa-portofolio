@@ -6,7 +6,7 @@
     <title>Rai's Portofolio</title>
     <link rel="stylesheet" href="dist/output.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-100">
     <header class="fixed top-0 left-0 z-10 flex w-full items-center bg-white border border-b-black">
@@ -280,6 +280,19 @@
     </section>
     
     
+    <section id="more" class="pt-36 pb-36 -scroll-mt-56 h-screen flex flex-col items-center justify-center">
+        <h4 id="special" class="lg:text-5xl text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">??????</h4>
+        <div class="flex flex-col max-w-md space-y-5">
+            <input type="password" placeholder="Enter Key" id="key-start"
+                class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal" />
+            <button id="button-special" onclick="onKeySubmit()" class="flex items-center justify-center px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black bg-black text-white">
+                Confirm
+            </button>
+        </div>
+    </section>
+    
+    
+  
     
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
