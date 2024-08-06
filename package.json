@@ -7,9 +7,25 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "dev:server": "nodemon  --exec \"npx tsc && node ./build/server | pino-pretty -L info\" --ext ts",
+    "dev:server-debug": "nodemon  --exec \"npx tsc && node ./build/server | pino-pretty -L debug\" --ext ts",
+    "build": "tsc",
+    "production": "npx tsc && npx tailwindcss -i ./view/input.css -o ./view/output.css --minify && node ./build"
   },
   "dependencies": {
-    "tailwindcss": "^3.4.7"
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/socket.io": "^3.0.2",
+    "@whiskeysockets/baileys": "^6.7.5",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "pino": "^9.3.2",
+    "qrcode-terminal": "^0.12.0",
+    "socket.io": "^4.7.5",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.5.4"
   }
 }
