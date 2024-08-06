@@ -6,8 +6,8 @@
   "author": "mraihanaf0@gmail.com",
   "license": "MIT",
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "dev": "npx tailwindcss -i ./view/input.css -o ./dist/output.css --watch",
+    "build": "npx tailwindcss -i ./view/input.css -o ./dist/output.css --minify",
     "dev:server": "nodemon  --exec \"npx tsc && node ./build/server | pino-pretty -L info\" --ext ts",
     "dev:server-debug": "nodemon  --exec \"npx tsc && node ./build/server | pino-pretty -L debug\" --ext ts",
     "build": "tsc",
