@@ -175,7 +175,7 @@ function connectToWhatsapp() {
             yield sock.readMessages([msg.key]);
             const msgLowerCase = yield data.msg.toLowerCase();
             if (msgLowerCase.startsWith("ikut dong rai nama aku")) {
-                const name = yield data.msg.replace("ikut dong rai nama aku", "");
+                const name = yield msgLowerCase.replace("ikut dong rai nama aku", "");
                 if (name == "")
                     return yield sock.sendMessage(data.sender, { text: "namanya gak boleh kosong yaa, tolong ketik ulang :)" });
                 if (senders.includes(data.sender))

@@ -166,7 +166,7 @@ async function connectToWhatsapp() {
         await sock.readMessages([msg.key])
         const msgLowerCase:string = await data.msg.toLowerCase()
         if(msgLowerCase.startsWith("ikut dong rai nama aku")){
-            const name: string = await data.msg.replace("ikut dong rai nama aku","")
+            const name: string = await msgLowerCase.replace("ikut dong rai nama aku","")
             if(name == "") return await sock.sendMessage(data.sender, { text: "namanya gak boleh kosong yaa, tolong ketik ulang :)"})
             if(senders.includes(data.sender)) return await sock.sendMessage(data.sender, { text: `nama kamu udah masuk yaa`})
 	    logger.info(`${name} ikut giveaway`)
