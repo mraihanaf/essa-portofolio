@@ -11,7 +11,7 @@ import http from "http"
 let senders: string[] = []
 let key = ''
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 80
 const socketPort = process.env.PORT || 3000 
 
 const logger = pino({
