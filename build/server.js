@@ -15,13 +15,23 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -172,19 +182,20 @@ function connectToWhatsapp() {
             logger.info(`[${data.isGroup ? "group" : "private"}](${data.sender}) ${data.msg}`);
             if (data.isGroup)
                 return;
-            yield sock.readMessages([msg.key]);
+            // await sock.readMessages([msg.key])
             const msgLowerCase = yield data.msg.toLowerCase();
-            if (msgLowerCase.startsWith("ikut dong rai nama aku")) {
-                const name = yield msgLowerCase.replace("ikut dong rai nama aku", "");
+            if (msgLowerCase.endsWith("juga mw")) {
+                const name = yield msgLowerCase.replace("juga mw", "");
                 if (name == "")
                     return yield sock.sendMessage(data.sender, { text: "namanya gak boleh kosong yaa, tolong ketik ulang :)" });
-                if (senders.includes(data.sender))
-                    return yield sock.sendMessage(data.sender, { text: `nama kamu udah masuk yaa` });
+                if (name.includes("[nama]"))
+                    return sock.sendMessage(data.sender, { text: "namanya invalid tolong ketik ulang yaa :)" });
+                // if(senders.includes(data.sender)) return await sock.sendMessage(data.sender, { text: `nama kamu udah masuk yaa`})
                 logger.info(`${name} ikut giveaway`);
                 io.emit("giveaway", name);
                 senders.push(data.sender);
-                yield sock.sendMessage(data.sender, { text: "okee good luck ya! :)" });
-                yield sock.sendMessage(data.sender, { text: "salam kenalll " + name });
+                yield sock.sendMessage(data.sender, { text: `okee ${name}` });
+                yield sock.sendMessage(data.sender, { text: `https://drive.google.com/file/d/1UWMI74fmkcdNg4kccX_ryWwePWVv6kpK/view?usp=sharing` });
             }
         }));
         io.on('connection', (socket) => {
@@ -195,7 +206,7 @@ function connectToWhatsapp() {
                     return logger.error("invalid key broadcast");
                 logger.info("success auth broadcast");
                 for (const sender of senders) {
-                    yield sock.sendMessage(sender, { text: "terimakasih sudah ikut yaa, salam kenall" });
+                    yield sock.sendMessage(sender, { text: "terimakasih sudah ikut yaa" });
                 }
                 senders = [];
                 logger.info("broadcast");

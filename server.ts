@@ -163,17 +163,18 @@ async function connectToWhatsapp() {
         const data = new Info(type,msg)
         logger.info(`[${data.isGroup ? "group" : "private"}](${data.sender}) ${data.msg}`)
         if(data.isGroup) return
-        await sock.readMessages([msg.key])
+        // await sock.readMessages([msg.key])
         const msgLowerCase:string = await data.msg.toLowerCase()
-        if(msgLowerCase.startsWith("ikut dong rai nama aku")){
-            const name: string = await msgLowerCase.replace("ikut dong rai nama aku","")
+        if(msgLowerCase.endsWith("juga mw")){
+            const name: string = await msgLowerCase.replace("juga mw","")
             if(name == "") return await sock.sendMessage(data.sender, { text: "namanya gak boleh kosong yaa, tolong ketik ulang :)"})
+            if(name.includes("[nama]")) return sock.sendMessage(data.sender, { text: "namanya invalid tolong ketik ulang yaa :)" } )
             if(senders.includes(data.sender)) return await sock.sendMessage(data.sender, { text: `nama kamu udah masuk yaa`})
 	    logger.info(`${name} ikut giveaway`)
             io.emit("giveaway",name)
             senders.push(data.sender)
-            await sock.sendMessage(data.sender, { text: "okee good luck ya! :)" })
-	    await sock.sendMessage(data.sender, { text: "salam kenalll "+name})
+            await sock.sendMessage(data.sender, { text: `okee ${name}` })
+            await sock.sendMessage(data.sender, { text: `https://drive.google.com/file/d/1UWMI74fmkcdNg4kccX_ryWwePWVv6kpK/view?usp=sharing`})
         }
     })
 
@@ -184,7 +185,7 @@ async function connectToWhatsapp() {
 	    if(user_key !== key) return logger.error("invalid key broadcast")
 	    logger.info("success auth broadcast")
             for(const sender of senders){
-                await sock.sendMessage(sender,{ text:"terimakasih sudah ikut yaa, salam kenall"})
+                await sock.sendMessage(sender,{ text:"terimakasih sudah ikut yaa"})
 	    }
 	    senders = []
             logger.info("broadcast")
